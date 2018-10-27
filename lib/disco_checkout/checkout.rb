@@ -25,7 +25,7 @@ class Checkout
   end
 
   def total
-    add_discounts(subtotal).round(2)
+    format_money(add_discounts(subtotal))
   end
   
   def get_item(code)
@@ -52,5 +52,9 @@ class Checkout
       price: item[:price],
       count: (@items.dig(code, :count) || 0) + 1
     }
+  end
+
+  def format_money(number)
+    "£#{number.round(2)}"
   end
 end

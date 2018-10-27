@@ -28,7 +28,7 @@ class CheckoutTest < Minitest::Test
     checkout.scan(:GR1)
     checkout.scan(:SR1)
 
-    assert_equal(checkout.total, 11.22)
+    assert_equal(checkout.total, '£11.22')
   end
 
   def test_scan_multiple
@@ -45,7 +45,7 @@ class CheckoutTest < Minitest::Test
 
     checkout.scan_multiple(:GR1, :SR1, :GR1, :GR1, :CF1)
 
-    assert_equal(checkout.total, 22.45)
+    assert_equal(checkout.total, '£22.45')
   end
 
   def test_case2
@@ -53,7 +53,7 @@ class CheckoutTest < Minitest::Test
 
     checkout.scan_multiple(:GR1, :GR1)
 
-    assert_equal(checkout.total, 3.11)
+    assert_equal(checkout.total, '£3.11')
   end
 
   def test_case3
@@ -61,7 +61,7 @@ class CheckoutTest < Minitest::Test
 
     checkout.scan_multiple(:SR1, :SR1, :GR1, :SR1)
 
-    assert_equal(checkout.total, 16.61)
+    assert_equal(checkout.total, '£16.61')
   end
 
   def test_case4
@@ -69,6 +69,6 @@ class CheckoutTest < Minitest::Test
 
     checkout.scan_multiple(:GR1, :CF1, :SR1, :CF1, :CF1)
 
-    assert_equal(checkout.total, 30.57)
+    assert_equal(checkout.total, '£30.57')
   end
 end
