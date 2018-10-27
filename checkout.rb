@@ -21,12 +21,11 @@ class Checkout
   def subtotal
     @items.inject(0) do |sum, (code, values)| 
       sum + (values[:price] * values[:count])
-    end.round(2)
+    end
   end
 
   def total
-    # add_discounts(subtotal)
-    subtotal
+    add_discounts(subtotal).round(2)
   end
   
   def get_item(code)
@@ -39,7 +38,7 @@ class Checkout
   
   private
   def add_discounts(subtotal)
-    #
+    @pricing_rules.inject(subtotal) { |total, rule| total - rule.call(@items) }
   end
 
   def find_item_by_code(code)

@@ -7,7 +7,8 @@ class Rule
 
   def call(items)
     filtered_items = filter_items(items)
-    apply_dicount(items) if @condition.call(filtered_items)
+    return 0 if filtered_items.empty? || !@condition.call(filtered_items)
+    apply_discount(filtered_items)
   end
   
   private
@@ -15,7 +16,7 @@ class Rule
     @apply_to.any? ? items.select { |key, value| @apply_to.include?(key) } : items
   end
 
-  def apply_dicount(items)
+  def apply_discount(items)
     @discount.call(items).round(2)
   end
 end
