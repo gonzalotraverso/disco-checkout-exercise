@@ -61,7 +61,7 @@ class CheckoutTest < Test::Unit::TestCase
   end
 
   def test_case4
-    checkout = Checkout.new([Rule::BuyBulkGetDiscount.new.call([:CF1], 3, 0.33)])
+    checkout = Checkout.new(rules)
 
     checkout.scan_multiple(:GR1, :CF1, :SR1, :CF1, :CF1)
 
@@ -73,7 +73,7 @@ class CheckoutTest < Test::Unit::TestCase
     @rules ||= [
       Rule::BuyOneGetOneFree.new.call([:GR1]),
       Rule::BuyBulkGetDiscount.new.call([:SR1], 3, 0.1),
-      Rule::BuyBulkGetDiscount.new.call([:CF1], 3, 0.33)
+      Rule::BuyBulkGetDiscount.new.call([:CF1], 3, (1/3.0))
     ]
   end
 end
