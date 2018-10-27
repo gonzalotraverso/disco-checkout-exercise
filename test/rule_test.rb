@@ -1,7 +1,6 @@
-require_relative "rule"
-require "test/unit"
+require 'test_helper'
 
-class RuleTest < Test::Unit::TestCase
+class RuleTest < Minitest::Test
   def test_buy_one_get_one_free
     # apply_to: item 1
     # condition: none
