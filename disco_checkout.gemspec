@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["gonzalotraverso@gmail.com"]
 
   spec.summary       = %q{checkout with discounts exercise}
-  spec.homepage      = "https://github.com/gonzalotraverso/kantox-disco-checkout.git"
+  spec.homepage      = "https://github.com/gonzalotraverso/disco-checkout-exercise.git"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
