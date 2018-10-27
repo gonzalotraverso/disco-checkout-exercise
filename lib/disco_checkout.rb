@@ -5,4 +5,5 @@ module DiscoCheckout
   require 'disco_checkout/rule'
   require 'disco_checkout/rule/buy_one_get_one_free'
   require 'disco_checkout/rule/buy_bulk_get_discount'
+  require 'disco_checkout/scanner'
 end

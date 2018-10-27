@@ -1,4 +1,5 @@
 require_relative "data/item_types"
+require_relative "scanner"
 
 class Checkout
   attr_reader :items
@@ -9,9 +10,7 @@ class Checkout
   end
 
   def scan(item_code)
-    code = item_code.to_sym
-    item = find_item_by_code(code)
-    add_item_to_basket(item, code)
+    @items = scanner.call(@items, item_code)
   end
 
   def scan_multiple(*items)
@@ -41,20 +40,11 @@ class Checkout
     @pricing_rules.inject(subtotal) { |total, rule| total - rule.call(@items) }
   end
 
-  def find_item_by_code(code)
-    item = ITEM_TYPES.select { |item| item[:code] == code }[0]
-    raise ArgumentError, "invalid code" if item.nil?
-    item
-  end
-
-  def add_item_to_basket(item, code)
-    @items[code] = {
-      price: item[:price],
-      count: (@items.dig(code, :count) || 0) + 1
-    }
-  end
-
   def format_money(number)
     "£#{number.round(2)}"
+  end
+
+  def scanner
+    @scanner ||= Scanner.new(ITEM_TYPES)
   end
 end
