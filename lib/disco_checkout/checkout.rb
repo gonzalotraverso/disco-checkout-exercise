@@ -4,13 +4,14 @@ require_relative "scanner"
 class Checkout
   attr_reader :items
 
-  def initialize(pricing_rules = [])
+  def initialize(pricing_rules = [], scanner: Scanner.new(ITEM_TYPES))
     @items = {}
     @pricing_rules = pricing_rules
+    @scanner = scanner
   end
 
   def scan(item_code)
-    @items = scanner.call(@items, item_code)
+    @items = @scanner.call(@items, item_code)
   end
 
   def scan_multiple(*items)
@@ -42,9 +43,5 @@ class Checkout
 
   def format_money(number)
     "£#{number.round(2)}"
-  end
-
-  def scanner
-    @scanner ||= Scanner.new(ITEM_TYPES)
   end
 end
